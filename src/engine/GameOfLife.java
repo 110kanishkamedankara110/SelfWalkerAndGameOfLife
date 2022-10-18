@@ -16,11 +16,11 @@ import javax.swing.JFrame;
  */
 public class GameOfLife extends Canvas {
 
-    static  int cellWidth = 10;
-    static  int cellHeight = cellWidth;
-    static  int mh = cellHeight * 4;
-    static  int ml = cellWidth * 2;
-    static  int cols = 600 / cellWidth;
+    static int cellWidth =5;
+    static int cellHeight = cellWidth;
+    static int mh = cellHeight * 4;
+    static int ml = cellWidth * 2;
+    static int cols = 600 / cellWidth;
     static int rows = 600 / cellHeight;
     int x = 100;
     int y = 0;
@@ -62,7 +62,7 @@ public class GameOfLife extends Canvas {
                     g.fillRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
 
                 } else {
-                    
+
                     g.clearRect(i * cellWidth, j * cellHeight, cellWidth, cellHeight);
 
                 }
@@ -91,35 +91,25 @@ public class GameOfLife extends Canvas {
         grid = newGrid;
     }
 
-    public int count(int grid[][], int i, int j) {
+       public int count(int grid[][], int i, int j) {
         int sum = 0;
-        for (int k = -1; k < 2; k++) {
-            for (int l = -1; l < 2; l++) {
-//            int col=(k+i+cols)%cols;
-//            int row=(l+j+rows)%rows;
-                int col = 0;
-                int row = 0;
-                if (i == 0 || i == cols - 1 || j == 0 || j == rows - 1) {
-                    if (i == 0 && k == -1) {
-                        col = cols - 1;
-                    }
-                    if (i == cols - 1 && k == 1) {
-                        col = 0;
-                    }
-                    if (j == 0 && l == -1) {
-                        row = rows - 1;
-                    }
-                    if (j == rows - 1 && k == 1) {
-                        row = 0;
-                    }
-                } else {
-                    col = (k + i);
-                    row = (l + j);
-                }
-
-                sum += grid[col][row];
-            }
+        int c=0;
+        for(int k=-1;k<2;k++){
+          for(int l=-1;l<2;l++){
+            int col=(k+i+cols)%cols;
+            int row=(l+j+rows)%rows;
+            
+              c++;
+              sum+=grid[col][row];
+            
+          }
         }
+        if(grid[i][j]==1){
+              sum--;
+              c--;
+        }
+        
+
 
         return sum;
     }
